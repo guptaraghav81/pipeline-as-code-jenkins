@@ -1,8 +1,8 @@
 import React from 'react'
-
+import "../../../App.css"
 const HighLightedText = ({text}) => {
   return (
-    <span className='font-bold text-richblue-400'>
+    <span className='font-bold highlightedText'>
       {text}
       </span>
   )

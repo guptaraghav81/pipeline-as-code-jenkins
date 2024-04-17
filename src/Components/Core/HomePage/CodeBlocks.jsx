@@ -5,9 +5,9 @@ import { FaArrowRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { TypeAnimation } from 'react-type-animation';
 
-const CodeBlocks = ({position, heading, subHeading, ctabtn1, ctnbtn2, codeblock, backgroundGradient, codeColor}) => {
+const CodeBlocks = ({position, heading, subHeading, ctabtn1, ctabtn2, codeblock, backgroundGradient, codeColor}) => {
   return (
-    <div className={`flex ${position} my-20 justify-between gap-10`}>
+    <div className={`flex ${position} my-20 justify-center gap-10`}>
         {/* Section1 */}
         <div className='w-[50%] flex flex-col gap-8'>
             {heading}
@@ -22,14 +22,14 @@ const CodeBlocks = ({position, heading, subHeading, ctabtn1, ctnbtn2, codeblock,
                     </div>
                 </CTAButton>
 
-                <CTAButton active={ctabtn1.active} Linkto={ctabtn1.Linkto}>
-                        {ctabtn1.text}
+                <CTAButton active={ctabtn2.active} Linkto={ctabtn2.Linkto}>
+                        {ctabtn2.text}
                 </CTAButton>
 
             </div>
         </div>
         {/* Section2 */}
-        <div className='w-[50%] flex '>
+        <div className='w-[50%] flex h-fit'>
             <div className='w-[10%] text-center flex flex-col text-richblack-400 font-inter font-bold'>
                 <p>1</p>
                 <p>2</p>
@@ -45,7 +45,7 @@ const CodeBlocks = ({position, heading, subHeading, ctabtn1, ctnbtn2, codeblock,
             </div>
 
             <div className={`w-[90%] flex flex-col gap-2 font-bold font-mono ${codeColor} pr-2`}>
-                <TypeAnimation sequence={[codeblock, 10000, ""]}
+                <TypeAnimation sequence={[codeblock, 5000, ""]}
                                repeat={Infinity}
                                cursor={true}
                                omitDeletionAnimation

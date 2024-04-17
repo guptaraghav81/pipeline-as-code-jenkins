@@ -1,15 +1,19 @@
-import react from "react"
 import { FaArrowRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import HighLightedText from "../Components/Core/HomePage/HighLightedText";
+import HighLightedText2 from "../Components/Core/HomePage/HighLightedText2";
 import CTAButton from "../Components/Core/HomePage/Button";
 import Banner from "../assets/Images/banner.mp4"
 import CodeBlocks from "../Components/Core/HomePage/CodeBlocks";
+import "../App.css"
+import TimelineSection from "../Components/Core/HomePage/TimelineSection";
+import LearningLanguageSection from "../Components/Core/HomePage/LearningLanguageSection";
+import InstructorSection from "../Components/Core/HomePage/InstructorSection";
 const Home = () => {
     return (
         <div>
           {/* Section 1 */}
-          <div className="relative mx-auto flex flex-col w-11/12 max-w-maxContent items-center text-white justify-between ">
+          <div className="relative mx-auto flex flex-col w-11/12 max-w-maxContent items-center text-white justify-between">
 
             {/* Instructor Button */}
             <Link to={"/signup"}>
@@ -34,14 +38,14 @@ const Home = () => {
               <CTAButton active={false} Linkto={"/login"}>Book a Demo</CTAButton>
             </div>
             {/* Video */}
-            <div className="w-[82%]  mx-3 my-11 shadow-2xl shadow-richblue-600 shadow-top">
+            <div className="w-[82%]  mx-3 my-11 videoBg shadow-lg shadow-blue-800">
               <video muted loop autoPlay>
                 <source src={Banner} type="video/mp4" />
               </video>
             </div>
 
             {/* Code Section 1 */}
-            <div>
+            <div className="w-[93%]">
               <CodeBlocks
                  position={"lg:flex-row"}
                  heading={<div className="text-4xl font-semibold">Unlock Your <HighLightedText text={"coding potential"}/> with our online courses</div>}
@@ -74,10 +78,84 @@ app.listen(PORT, () => {
                  codeColor={"text-yellow-25"}
               />
             </div>
+
+            {/* Code Section 2 */}
+            <div className="w-[93%]">
+              <CodeBlocks
+                 position={"lg:flex-row-reverse"}
+                 heading={<div className="text-4xl font-semibold">Start <HighLightedText text={"coding in seconds"}/></div>}
+                 subHeading={"Go ahead, give it a try. Our hands-on learning environment means you'll be writing real code from your very first lesson."}
+                 ctabtn1={
+                  {
+                    text: "Continue Lesson",
+                    Linkto: "/signup",
+                    active:true,
+                  }
+                 }
+                 ctabtn2={
+                  {
+                    text: "Learn more",
+                    Linkto: "/login",
+                    active:false,
+                  }
+                 }
+codeblock={`import React from 'react'
+import {Link} from 'react-router-dom'
+const Button = ({children, active}) => {
+  return (
+    <Link to={"/signup"}>
+        <div className={"text-center hover:scale-95"}>
+            {children}
+        </div>
+    </Link>
+  )
+}`}
+
+                 codeColor={"text-[#60a5fa]"}
+              />
+            </div>
           </div>
           {/* Section 2 */}
+          <div className=" bg-pure-greys-5 text-richblack-700">
+
+            <div className="homepage_bg h-[333px]">
+              <div className=" w-11/12 max-w-maxContent h-[100%] flex items-end gap-5 mx-auto">
+                <div className="flex gap-7 text-white mx-auto mb-[4rem]">
+                  <CTAButton Linkto={"/signup"} active={true}>
+                    <div className="flex items-center gap-3">Explore Full Catelog <FaArrowRight/></div>
+                  </CTAButton>
+                  <CTAButton Linkto={"/login"} active={false}>
+                    <div>Learn More</div>
+                  </CTAButton>
+                </div>
+              </div>
+            </div>
+
+            <div className="relative mx-auto flex flex-col w-11/12 max-w-maxContent items-center justify-between mt-10">
+              <div className="flex justify-between">
+                <div className="text-4xl font-semibold w-[50%]">
+                Get the Skills you need for a <HighLightedText2 text={"Job that is in demand"}/>
+                </div>
+                <div className="flex flex-col w-[45%] gap-7 items-start">
+                  <div className="font-bold text-lg">
+                  The modern StudyNotion is the dictates its own terms. Today, to be a competitive specialist requires more than professional skills.
+                  </div>
+                  <CTAButton Linkto={"/login"} active={true}>Learn More</CTAButton>
+                </div>
+              </div>
+            </div>
+
+            <TimelineSection/>
+            <LearningLanguageSection/>
+          </div>
           
           {/* Section 3 */}
+          <div className="relative mx-auto flex flex-col w-11/12 max-w-maxContent items-center text-white justify-between">
+            <InstructorSection/>
+            <h2>Reviews from Other Learners</h2>
+            {/* Revier Slider */}
+            
+          </div>
           
           {/* Section 4 */}
           
