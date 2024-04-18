@@ -9,6 +9,8 @@ import "../App.css"
 import TimelineSection from "../Components/Core/HomePage/TimelineSection";
 import LearningLanguageSection from "../Components/Core/HomePage/LearningLanguageSection";
 import InstructorSection from "../Components/Core/HomePage/InstructorSection";
+import Footer from "../Components/common/Footer";
+import ExploreMore from "../Components/Core/HomePage/ExploreMore";
 const Home = () => {
     return (
         <div>
@@ -38,7 +40,7 @@ const Home = () => {
               <CTAButton active={false} Linkto={"/login"}>Book a Demo</CTAButton>
             </div>
             {/* Video */}
-            <div className="w-[82%]  mx-3 my-11 videoBg shadow-lg shadow-blue-800">
+            <div className="w-[82%]  mx-3 my-11 shadow-xl shadow-blue-800">
               <video muted loop autoPlay>
                 <source src={Banner} type="video/mp4" />
               </video>
@@ -114,9 +116,12 @@ const Button = ({children, active}) => {
                  codeColor={"text-[#60a5fa]"}
               />
             </div>
+            <div>
+            <ExploreMore/>
+            </div>
           </div>
           {/* Section 2 */}
-          <div className=" bg-pure-greys-5 text-richblack-700">
+          <div className=" bg-pure-greys-5 text-richblack-700 pb-20">
 
             <div className="homepage_bg h-[333px]">
               <div className=" w-11/12 max-w-maxContent h-[100%] flex items-end gap-5 mx-auto">
@@ -154,10 +159,11 @@ const Button = ({children, active}) => {
             <InstructorSection/>
             <h2>Reviews from Other Learners</h2>
             {/* Revier Slider */}
-            
+
           </div>
           
           {/* Section 4 */}
+          <Footer/>
           
         </div>
     )
