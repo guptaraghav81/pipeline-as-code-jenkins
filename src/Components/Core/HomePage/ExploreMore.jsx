@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { HomePageExplore } from '../../../data/homepage-explore';
 import HighLightedText from './HighLightedText';
+import ExploreCards from './ExploreCards';
 const TabsName= [
     "Free",
     "New to coding",
@@ -15,17 +16,18 @@ const ExploreMore = () => {
     const setMyCards = (value) => {
         setCurrentTab(value);
         const result= HomePageExplore.filter((course) => course.tag === value);
-        setCourse(result.courses);
-        setCurrentCard(result.courses[0].heading)
+        setCourse(result[0].courses);
+        setCurrentCard(result[0].courses[0].heading)
     }
   return (
-    <div className='flex flex-col gap-1'>
-        <div className='text-4xl font-semibold text-center'>
-        Unlock the <HighLightedText text={"power of Code"}/>
-        </div>
-        <p className='text-center text-richblack-200 text-[1.2rem] font-semibold'>Learn to build anything you can imagine</p>
+    <>
+        <div className='flex flex-col gap-1 relative mb-24'>
+           <div className='text-4xl font-semibold text-center'>
+               Unlock the <HighLightedText text={"power of Code"}/>
+           </div>
+            <p className='text-center text-richblack-200 text-[1.2rem] font-semibold'>Learn to build anything you can imagine</p>
 
-        <div className='flex gap-4 mt-6 rounded-xl bg-richblack-800 mb-7 py-2 px-4'>
+        <div className='flex gap-4 mt-6 rounded-xl bg-richblack-800 mb-7 py-2 px-4 justify-between'>
             {
                 TabsName.map((item,index) => {
                     return (
@@ -36,19 +38,18 @@ const ExploreMore = () => {
                 })
             }
         </div>
-        
-        {/* <div className='lg:h-[150px]'> */}
 
-            {/* Cards Group */}
-            {/* { */}
-                {/* course.map((item,index) => { */}
-                    {/* return ( */}
-                        {/*  */}
-                    {/* ) */}
-                {/* }) */}
-            {/* } */}
-        {/* </div> */}
-    </div>
+        <div className=' flex items-center gap-x-8 mt-4 absolute z-20 mx-auto top-48 -translate-x-56'>
+            {
+                course.map((item,index) => {
+                    return (
+                        <ExploreCards item={item} key={index}/>
+                    )
+                })
+            }
+        </div>
+        </div>
+        </>
   )
 }
 
