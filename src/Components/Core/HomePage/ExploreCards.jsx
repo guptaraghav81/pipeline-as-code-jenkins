@@ -11,13 +11,17 @@ const ExploreCards = ({item}) => {
         <div className='text-richblack-200 font-inter pb-4 min-h-[110px]'>
             {item.description}
         </div>
-        <div className='flex justify-between'>
-            <div className='flex gap-2 items-center font-semibold'>
+        <div className='flex justify-between pr-4'>
+            <div className='flex w-[95%] items-center font-semibold justify-between'>
+              <div className='flex items-center gap-1'>
               <MdOutlinePeopleOutline className='text-[27px] text-blue-600'/>
             <p className=' text-blue-200'>{item.level}</p>
-            </div>
             <p className='font-semibold text-caribbeangreen-300'>{item.lessionNumber} Lession</p>
-            {/* <img src={item.lessionNumber} alt="" srcset="" width={80}/> */}
+            </div>
+            <div>
+            <img src={item.logo} alt="logo" className='w-12 h-12 object-cover' />
+            </div>
+            </div>
         </div>
     </div>
 

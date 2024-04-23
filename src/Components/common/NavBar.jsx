@@ -70,7 +70,7 @@ const NavBar = () => {
                                                             subLinks.map((subLink, index) => {
                                                                 return (
                                                                     <Link to={`${subLink.link}`} key={index}>
-                                                                        <p className='font-bold hover:bg-blue-200 py-2 pl-3 rounded-lg text-richblack-800 hover:text-white'>{subLink.title}</p>
+                                                                        <p className='font-bold hover:bg-blue-200 py-2 pl-3 rounded-lg text-richblack-800 hover:text-white border-b-2 border-richblue-400 mt-1'>{subLink.title}</p>
                                                                     </Link>
                                                                 )
                                                             })
