@@ -19,7 +19,7 @@ const Home = () => {
 
             {/* Instructor Button */}
             <Link to={"/signup"}>
-              <div className="group mt-16 p-1 mx-auto rounded-full bg-richblack-800 font-bold text-richblack-200 transition-all duration-200 hover:scale-95 w-fit">
+              <div className="group mt-12 p-1 mx-auto rounded-full bg-richblack-800 font-bold text-richblack-200 transition-all duration-200 hover:scale-95 w-fit">
                 <div className="flex flex-row items-center gap-2 px-11 py-[5px] rounded-full transition-all duration-200 group-hover:bg-richblack-900">
                   <p>Become an Instructor</p>
                   <FaArrowRight />

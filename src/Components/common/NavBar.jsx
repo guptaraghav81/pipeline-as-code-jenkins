@@ -8,7 +8,6 @@ import { IoCartOutline } from "react-icons/io5";
 import ProfileDropDown from '../Core/Auth/ProfileDropDown'
 import { apiConnector } from '../../services/apiConnector'
 import { categories } from '../../services/apis'
-import { FaChevronDown } from "react-icons/fa";
 import { FaCircleChevronDown } from "react-icons/fa6";
 
 const subLinks= [
@@ -20,6 +19,10 @@ const subLinks= [
         title:"java",
         link:"/catelog/java",
     },
+    {
+        title:"reactJs",
+        link:"/catelog/reactJs",
+    },
 ]
 const NavBar = () => {
 
@@ -28,18 +31,18 @@ const NavBar = () => {
     const {totalItems} = useSelector((state) => state.cart);
 
     // const [subLinks, setSubLinks] = useState([]);
-    const fetchSubLinks = async() => {
-        try {
-            const result = await apiConnector("GET", categories.CATEGORIES_API);
-            console.log("PRINTING SUBLINKS RESULT: ", result);
-            // setSubLinks(result.data.data);
-        } catch (error) {
-            console.log("Coudn't fetch Category List");
-        }
-    }
-    useEffect(() => {
-        // fetchSubLinks();
-    },[])
+    // const fetchSubLinks = async() => {
+    //     try {
+    //         const result = await apiConnector("GET", categories.CATEGORIES_API);
+    //         console.log("PRINTING SUBLINKS RESULT: ", result);
+    //         setSubLinks(result.data.data);
+    //     } catch (error) {
+    //         console.log("Coudn't fetch Category List");
+    //     }
+    // }
+    // useEffect(() => {
+    //     fetchSubLinks();
+    // },[])
 
     const location = useLocation();
     const matchRoute = (route) => {
@@ -62,15 +65,15 @@ const NavBar = () => {
                                         <div className='relative flex items-center gap-1 group cursor-pointer z-10'>
                                             <p>{item.title}</p>
                                             <FaCircleChevronDown/>
-                                            <div className='invisible absolute left-[50%] top-[50%] translate-x-[-80%] translate-y-[50%] flex flex-col rounded-md bg-richblack-5 p-4 text-richblack-900 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100 lg:w-[300px] z-[30]'>
-                                                <div className='absolute left-[86%] -top-2 h-6 w-6 rotate-45 rounded bg-richblack-5 z-[-1]'>
+                                            <div className='invisible absolute left-[50%] top-[50%] translate-x-[-80%] translate-y-[50%] flex flex-col rounded-tr-xl rounded-bl-xl bg-richblack-800 p-4 text-richblack-900 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100 lg:w-[300px] z-[30] -mt-10'>
+                                                <div className='absolute left-[86%] -top-2 h-6 w-6 rotate-45 rounded bg-richblack-800 z-[-1]'>
                                                 </div>
                                                 {
                                                     subLinks.length ? (
                                                             subLinks.map((subLink, index) => {
                                                                 return (
                                                                     <Link to={`${subLink.link}`} key={index}>
-                                                                        <p className='font-bold hover:bg-blue-200 py-2 pl-3 rounded-lg text-richblack-800 hover:text-white border-b-2 border-richblue-400 mt-1'>{subLink.title}</p>
+                                                                        <p className='bg-white font-bold hover:bg-yellow-200 py-2 pl-3 rounded-tr-xl rounded-bl-xl text-richblack-800 hover:text-white shadow-sm shadow-caribbeangreen-600 mt-1'>{subLink.title}</p>
                                                                     </Link>
                                                                 )
                                                             })

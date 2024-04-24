@@ -5,22 +5,36 @@ import NavBar from "./Components/common/NavBar";
 import Login from "./pages/Login"
 import Signup from "./pages/Signup"
 import OpenRoute from "./Components/Core/Auth/OpenRoute";
+import Error from "./pages/Error";
+import ForgotPassword from "./pages/ForgotPassword";
+import UpdatePassword from "./pages/UpdatePassword";
 function App() {
   return (
     <div className="w-screen min-h-screen bg-richblack-900 flex flex-col font-inter">
       <NavBar/>
       <Routes>
         <Route path="/" element={<Home/>}></Route>
-
-        <Route path="/login" element={
+        <Route path="/error" element={<Error/>}></Route>
+        <Route path="login" element={
           <OpenRoute>
             <Login/>
           </OpenRoute>
         }></Route>
 
-        <Route path="/signup" element={
+        <Route path="signup" element={
           <OpenRoute>
             <Signup/>
+          </OpenRoute>
+        }></Route>
+
+        <Route path="forgot-password" element={
+          <OpenRoute>
+            <ForgotPassword/>
+          </OpenRoute>
+        }></Route>
+          <Route path="update-password/:id" element={
+          <OpenRoute>
+            <UpdatePassword/>
           </OpenRoute>
         }></Route>
       </Routes>
