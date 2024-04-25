@@ -4,7 +4,7 @@ import logo from "../../assets/Logo/Logo-Full-Light.png"
 import { NavbarLinks } from '../../data/navbar-links'
 import "../../App.css"
 import { useSelector } from 'react-redux'
-import { IoCartOutline } from "react-icons/io5";
+import { MdShoppingCart } from "react-icons/md";
 import ProfileDropDown from '../Core/Auth/ProfileDropDown'
 import { apiConnector } from '../../services/apiConnector'
 import { categories } from '../../services/apis'
@@ -98,11 +98,11 @@ const NavBar = () => {
             <div className='flex gap-x-4 items-center'>
                 {
                     user && user.accountType !== "Instructor" && (
-                        <Link to="/dashboard/cart" className='relative'>
-                            <IoCartOutline/>
+                        <Link to="/dashboard/cart" className='relative text-white'>
+                            <MdShoppingCart className='w-8 h-5'/>
                             {
                                 totalItems > 0 && (
-                                    <span>{totalItems}</span>
+                                    <span className='absolute -right-2 -top-3 bg-green-600 rounded-full w-5 h-5 flex items-center justify-center'>{totalItems}</span>
                                 )
                             }
                         </Link>
