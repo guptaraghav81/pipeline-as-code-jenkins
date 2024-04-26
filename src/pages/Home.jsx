@@ -40,7 +40,7 @@ const Home = () => {
               <CTAButton active={false} Linkto={"/login"}>Book a Demo</CTAButton>
             </div>
             {/* Video */}
-            <div className="w-[82%]  mx-3 my-11 shadow-xl shadow-blue-800">
+            <div className="w-[82%]  mx-3 my-11 shadow-2xl shadow-blue-400">
               <video muted loop autoPlay>
                 <source src={Banner} type="video/mp4" />
               </video>

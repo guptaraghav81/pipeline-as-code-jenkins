@@ -107,7 +107,7 @@ export function login(email, password, navigate) {
         console.log("Data Response", response.data.user);
       dispatch(setUser({ ...response.data.user, image: userImage }))
       localStorage.setItem("token", JSON.stringify(response.data.token))
-      localStorage.setItem('userData', JSON.stringify(response.data.user));
+      localStorage.setItem('user', JSON.stringify(response.data.user));
       navigate("/dashboard/my-profile")
     } catch (error) {
       console.log("LOGIN API ERROR............", error)
