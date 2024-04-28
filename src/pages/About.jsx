@@ -7,6 +7,8 @@ import Quote from '../Components/Core/AboutPage/Quote'
 import HighLightedText from '../Components/Core/HomePage/HighLightedText'
 import StatsComponenet from '../Components/Core/AboutPage/StatsComponent'
 import Footer from '../Components/common/Footer'
+import LearningGrid from '../Components/Core/AboutPage/LearningGrid'
+import ContactFormSection from '../Components/Core/AboutPage/ContactFormSection'
 const About = () => {
   return (
     <div className='mx-auto text-white w-[100%]'>
@@ -97,7 +99,10 @@ const About = () => {
       </section>
 
       <StatsComponenet/>
-
+      <section>
+        <LearningGrid/>
+        <ContactFormSection/>
+      </section>
       <Footer/>
     </div>
   )
