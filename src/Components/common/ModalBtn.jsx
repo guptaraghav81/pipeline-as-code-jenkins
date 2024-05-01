@@ -12,7 +12,7 @@ const ModalBtn = ({
   return (
     <button
     disabled={disable}
-    onclick={onclick}
+    onClick={onclick}
     type={type}>
         {
             children ? (

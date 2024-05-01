@@ -62,6 +62,9 @@ function App() {
           </PrivateRoute> 
         }>
           <Route path="dashboard/my-profile" element={<MyProfile/>}></Route>
+          <Route path="dashboard/settings" element={<MyProfile/>}></Route>
+          <Route path="dashboard/enrolled-courses" element={<MyProfile/>}></Route>
+          <Route path="dashboard/purchase-history" element={<MyProfile/>}></Route>
         </Route>
           <Route path="*" element={<Error/>}></Route>
 
