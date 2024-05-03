@@ -8,12 +8,13 @@ const ModalBtn = ({
     outline=false,
     customClasses,
     type,
+    properties,
 }) => {
   return (
     <button
     disabled={disable}
     onClick={onclick}
-    type={type}>
+    type={type} className={`bg-yellow-50 text-richblack-800 font-semibold rounded-lg py-1 px-1`}>
         {
             children ? (
                 <>

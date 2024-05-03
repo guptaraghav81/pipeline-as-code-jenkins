@@ -23,13 +23,12 @@ const MyProfile = () => {
             <ModalBtn onclick={() => {
                 return navigate("/dashboard/settings")
             }}>
-                <div className='flex gap-1 items-center text-lg'>
+                <div className='flex items-center gap-1 text-lg'>
                 <p>Edit</p>
                 <BiEdit/>
                 </div>
                 </ModalBtn>
-        </div>
-
+            </div>
         <div className='flex flex-col bg-richblack-800 py-8 px-8 rounded-tl-xl rounded-br-xl gap-4'>
             <div className='flex justify-between'>
                 <p className='text-xl font-semibold'>About</p>
