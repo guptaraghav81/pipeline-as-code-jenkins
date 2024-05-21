@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 const RequirementField = ({name, label, register, errors, setValue, getValues}) => {
   const [requirement, setRequirement] = useState("");
@@ -9,6 +9,16 @@ const RequirementField = ({name, label, register, errors, setValue, getValues}) 
       setRequirement("");
     }
   }
+  useEffect(()=> {
+        register(name, {
+            required:true,
+            // validate: (value) => value.length > 0
+        })
+    },[])
+
+    useEffect(()=> {
+        setValue(name, requirementList);
+    },[requirementList])
   const handleRemoveRequirement = (clearIndex)=> {
     setRequirementList(requirementList.filter((item, index)=> index !== clearIndex));
   }
