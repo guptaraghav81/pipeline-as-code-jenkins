@@ -8,6 +8,8 @@ import RequirementField from './requirementField';
 import { COURSE_STATUS } from '../../../../../utils/constants';
 import toast from 'react-hot-toast';
 import ModalBtn from "../../../../common/ModalBtn"
+import ChipInput from './ChipInput';
+import Upload from '../Upload';
 const CourseInformationForm = () => {
       const {
         register,
@@ -106,22 +108,24 @@ const CourseInformationForm = () => {
     formData.append("courseName", data.courseTitle);
     formData.append("courseDescription", data.courseShortDesc);
     formData.append("price", data.coursePrice);
+    formData.append("tag", JSON.stringify(data.courseTags))
     formData.append("whatYouWillLearn", data.courseBenefits);
     formData.append("category", data.courseCategory);
     formData.append("instructions", JSON.stringify(data.courseRequirements));
     formData.append("status", COURSE_STATUS.DRAFT);
+    formData.append("thumbnailImage", data.courseImage)
+    console.log("DATA->  ",formData);
 
     setloading(true);
     console.log("BEFORE add course API call");
     console.log("PRINTING FORMDATA", formData);
     const result = await addCourseDetails(formData,token);
     if(result) {
-        setStep(2);
+        dispatch(setStep(2));
+        console.log("yesssss");
         dispatch(setCourse(result));
     }
     setloading(false);
-    console.log("PRINTING FORMDATA", formData);
-    console.log("PRINTING result", result);
 }
 
   return (
@@ -135,7 +139,7 @@ const CourseInformationForm = () => {
           id="courseTitle"
           placeholder="Enter Course Title"
           {...register("courseTitle", { required: true })}
-          className="form-style w-full"
+          className="form-style w-full rounded-[0.5rem] bg-richblack-700 p-[12px] text-richblack-5"
         />
         {errors.courseTitle && (
           <span className="ml-2 text-xs tracking-wide text-pink-200">
@@ -151,7 +155,7 @@ const CourseInformationForm = () => {
           id="courseShortDesc"
           placeholder="Enter Description"
           {...register("courseShortDesc", { required: true })}
-          className="form-style resize-x-none min-h-[130px] w-full"
+          className="form-style resize-x-none min-h-[130px] w-full rounded-[0.5rem] bg-richblack-700 p-[12px] text-richblack-5"
         />
         {errors.courseShortDesc && (
           <span className="ml-2 text-xs tracking-wide text-pink-200">
@@ -174,9 +178,9 @@ const CourseInformationForm = () => {
                 value: /^(0|[1-9]\d*)(\.\d+)?$/,
               },
             })}
-            className="form-style w-full !pl-12"
+            className="form-style w-full rounded-[0.5rem] bg-richblack-700 p-[12px] text-richblack-5 pl-12"
           />
-          <HiOutlineCurrencyRupee className="absolute left-3 top-1/2 inline-block -translate-y-1/2 text-2xl text-richblack-400" />
+          <HiOutlineCurrencyRupee className="absolute left-3 top-1/2 inline-block -translate-y-1/2 text-2xl text-richblack-5" />
         </div>
         {errors.coursePrice && (
           <span className="ml-2 text-xs tracking-wide text-pink-200">
@@ -192,7 +196,7 @@ const CourseInformationForm = () => {
           {...register("courseCategory", { required: true })}
           defaultValue=""
           id="courseCategory"
-          className="form-style w-full"
+          className="form-style w-full rounded-[0.5rem] bg-richblack-700 p-[12px] text-richblack-5"
         >
           <option value="" disabled>
             Choose a Category
@@ -210,6 +214,23 @@ const CourseInformationForm = () => {
           </span>
         )}
       </div>
+      <ChipInput
+        label="Tags"
+        name="courseTags"
+        placeholder="Enter Tags and press Enter"
+        register={register}
+        errors={errors}
+        setValue={setValue}
+        getValues={getValues}
+      />
+      <Upload
+        name="courseImage"
+        label="Course Thumbnail"
+        register={register}
+        setValue={setValue}
+        errors={errors}
+        editData={editCourse ? course?.thumbNail : null}
+      />
       <div className="flex flex-col space-y-2">
         <label className="text-sm text-richblack-5" htmlFor="courseBenefits">
           Benefits of the course <sup className="text-pink-200">*</sup>
@@ -218,7 +239,7 @@ const CourseInformationForm = () => {
           id="courseBenefits"
           placeholder="Enter benefits of the course"
           {...register("courseBenefits", { required: true })}
-          className="form-style resize-x-none min-h-[130px] w-full"
+          className="form-style resize-x-none min-h-[130px] w-full rounded-[0.5rem] bg-richblack-700 p-[12px] text-richblack-5"
         />
         {errors.courseBenefits && (
           <span className="ml-2 text-xs tracking-wide text-pink-200">
@@ -248,6 +269,7 @@ const CourseInformationForm = () => {
 
             <ModalBtn
                 text={!editCourse ? "Next" : "Save Changes"}
+                customClasses={"bg-richblack-900 text-yellow-50 px-3 py-2"}
                 />
         </div>
     </form>

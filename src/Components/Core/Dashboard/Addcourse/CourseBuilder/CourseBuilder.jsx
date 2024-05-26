@@ -51,13 +51,15 @@ const CourseBuilder = () => {
         )
       }
       else{
-        result = await createSection(
+        console.log(data.sectionName);
+        result = await createSection( 
           {
           sectionName: data.sectionName,
           courseId: course._id,
          },token
       )
       }
+      console.log(result);
       if(result){
         dispatch(setCourse(result));
         setEditSectionName(null);
@@ -66,8 +68,13 @@ const CourseBuilder = () => {
       setLoading(false);
     }
     
-    const handleChangeSectionName = () => {
-      
+    const handleChangeSectionName = (sectionId, sectionName) => {
+      if(editSectionName === sectionId){
+        cancelEdit();
+        return;
+      }
+        setEditSectionName(sectionId);
+        setValue("sectionName", sectionName);
     }
   return (
     <div className='text-white'>
@@ -79,10 +86,10 @@ const CourseBuilder = () => {
             id='sectionName'
             placeholder='Add section name'
             {...register("sectionName", {required:true})}
-            className='w-full'
+            className='w-full text-richblack-800'
           />
           {errors.sectionName && (
-            <span>Section Name is required</span>
+            <span className='text-pink-200 text-sm'>Section Name is required*</span>
           )}
         </div>
 
@@ -91,8 +98,8 @@ const CourseBuilder = () => {
             type="Submit"
             text={editSectionName ? "Edit Section Name" : "Create Section"}
             outline={true}
-            customClasses={"text-white"}>
-                <MdAddCircleOutline className='text-richblack-800' size={20}/>
+            customClasses={"bg-richblack-900 text-yellow-50"}>
+                <MdAddCircleOutline className='text-yellow-50' size={20}/>
             </ModalBtn>
             {editSectionName && (
             <button
@@ -116,7 +123,7 @@ const CourseBuilder = () => {
         className='rounded-md cursor-pointer flex items-center '>
           Back
         </button>
-        <ModalBtn text="Next" onclick={goToNext}>
+        <ModalBtn text="Next" onclick={goToNext} customClasses={"bg-yellow-50"}>
           <BiRightArrow />
         </ModalBtn>
 

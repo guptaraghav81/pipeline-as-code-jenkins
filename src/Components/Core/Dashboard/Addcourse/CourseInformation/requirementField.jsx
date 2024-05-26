@@ -31,12 +31,12 @@ const RequirementField = ({name, label, register, errors, setValue, getValues}) 
                 id={name}
                 value={requirement}
                 onChange={(e) => setRequirement(e.target.value)}
-                className='w-full'
+                className='w-full rounded-[0.5rem] bg-richblack-700 p-[12px] text-richblack-5'
             />
             <button
             type='button'
             onClick={handleAddRequirement}
-            className='font-semibold text-yellow-50'>
+            className='font-semibold text-yellow-50 my-2 bg-richblack-900 rounded-lg px-2'>
                 Add
             </button>
         </div>

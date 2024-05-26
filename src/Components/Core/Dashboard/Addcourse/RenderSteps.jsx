@@ -6,8 +6,7 @@ import CourseBuilder from './CourseBuilder/CourseBuilder';
 
 const RenderSteps = () => {
 
-//   const {step} = useSelector((state)=> state.course);
-const step=2;
+  const {step} = useSelector((state)=> state.course);
     const steps = [
         {
             id:1,

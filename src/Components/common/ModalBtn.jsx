@@ -14,7 +14,7 @@ const ModalBtn = ({
     <button
     disabled={disable}
     onClick={onclick}
-    type={type} className={`${properties} bg-yellow-50 text-richblack-800 font-semibold rounded-lg py-1 px-1`}>
+    type={type} className={`${properties} ${customClasses}  font-semibold rounded-lg py-1 px-1`}>
         {
             children ? (
                 <>
