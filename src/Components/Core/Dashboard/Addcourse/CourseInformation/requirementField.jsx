@@ -45,12 +45,12 @@ const RequirementField = ({name, label, register, errors, setValue, getValues}) 
                 <ul>
                     {
                         requirementList.map((requirement, index) => (
-                            <li key={index} className='flex items-center text-richblack-5'>
-                                <span>{requirement}</span>
+                            <li key={index} className='flex items-center text-richblack-5 mt-2 justify-between'>
+                                <span className='text-lg text-richblack-5'>{requirement}</span>
                                 <button
                                 type='button'
                                 onClick={() => handleRemoveRequirement(index)}
-                                className='text-xs text-pure-greys-300'>
+                                className='text-sm text-yellow-50 bg-richblack-900 mr-8 px-1 rounded-lg '>
                                     clear
                                 </button>
                             </li>

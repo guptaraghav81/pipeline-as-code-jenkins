@@ -39,6 +39,7 @@ const CourseBuilder = () => {
     const onSubmit = async (data) => {
       setLoading(true);
       let result;
+      console.log(data.sectionName);
       if(editSectionName){
         result = await updateSection(
           {
