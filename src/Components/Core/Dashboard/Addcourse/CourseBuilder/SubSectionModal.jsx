@@ -96,7 +96,7 @@ const SubSectionModal = ({
     setLoading(false);
   }
   return (
-    <div>
+    <div className=''>
       <div>
         <div>
             <p>{view && "Viewing"} {add && "Adding"} {edit && "Editing"} Lecture</p>

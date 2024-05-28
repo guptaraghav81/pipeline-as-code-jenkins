@@ -47,8 +47,10 @@ const NestedView = ({handleChangeSectionName}) => {
             return <details key={section._id} className='text-white' open>
               <summary className='flex items-center justify-between gap-x-3 border-b-2'>
                 <div className='flex items-center gap-x-3'>
+                  <div className='text-xl'>
                   <RxDropdownMenu/>
-                  <p>{section?.sectionName}</p>
+                  </div>
+                  <p className='text-[18px] font-semibold'>{section?.sectionName}</p>
                 </div>
                 <div className='flex items-center gap-x-3'>
                 <button
@@ -114,7 +116,7 @@ const NestedView = ({handleChangeSectionName}) => {
                 }
                                     <button
                     onClick={() => setAddSubSection(section._id)}
-                    className='ml-6 mt-2 flex items-center gap-x-2 text-yellow-50 text-sm'
+                    className='relative ml-6 mt-2 flex items-center gap-x-2 text-yellow-50 text-sm'
                     >
                         <AiOutlinePlus />
                         <p>Add Lecture</p>

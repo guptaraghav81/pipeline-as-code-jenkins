@@ -79,7 +79,7 @@ const CourseBuilder = () => {
     }
   return (
     <div className='text-white'>
-        <p>Course Builder</p>
+        <p className='text-2xl font-semibold mb-4'>Course Builder</p>
         <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label htmlFor='sectionName'>Section name <sup>*</sup></label>
@@ -87,7 +87,7 @@ const CourseBuilder = () => {
             id='sectionName'
             placeholder='Add section name'
             {...register("sectionName", {required:true})}
-            className='w-full text-richblack-800'
+            className='form-style w-full rounded-[0.5rem] bg-richblack-700 p-[12px] text-richblack-5 pl-12s'
           />
           {errors.sectionName && (
             <span className='text-pink-200 text-sm'>Section Name is required*</span>
@@ -99,7 +99,7 @@ const CourseBuilder = () => {
             type="Submit"
             text={editSectionName ? "Edit Section Name" : "Create Section"}
             outline={true}
-            customClasses={"bg-richblack-900 text-yellow-50"}>
+            customClasses={"flex gap-2 items-center border border-yellow-50 px-2 py-2 bg-richblack-900 text-yellow-50"}>
                 <MdAddCircleOutline className='text-yellow-50' size={20}/>
             </ModalBtn>
             {editSectionName && (
@@ -124,7 +124,7 @@ const CourseBuilder = () => {
         className='rounded-md cursor-pointer flex items-center '>
           Back
         </button>
-        <ModalBtn text="Next" onclick={goToNext} customClasses={"bg-yellow-50"}>
+        <ModalBtn text="Next" onclick={goToNext} customClasses={"flex items-center gap-2 text-richblack-900 bg-yellow-50"}>
           <BiRightArrow />
         </ModalBtn>
 
