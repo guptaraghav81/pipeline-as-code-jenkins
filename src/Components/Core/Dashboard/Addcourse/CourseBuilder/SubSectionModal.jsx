@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
-import { createSubSection, updateSection } from '../../../../../services/operations/courseDetailsAPI';
+import { createSubSection, updateSubSection } from '../../../../../services/operations/courseDetailsAPI';
 import { setCourse } from '../../../../../Slices/courseSlice';
 import ModalBtn from '../../../../common/ModalBtn';
 import Upload from "../Upload"
@@ -31,9 +31,9 @@ const SubSectionModal = ({
 
   useEffect(()=> {
     if(view || edit){
-      setValue("LectureTitle", modalData.title);
-      setValue("LectureDesc", modalData.description);
-      setValue("LectureVideo", modalData.videoUrl);
+      setValue("lectureTitle", modalData.title)
+      setValue("lectureDesc", modalData.description)
+      setValue("lectureVideo", modalData.videoUrl)
     }
   },[]);
 
@@ -50,17 +50,21 @@ const SubSectionModal = ({
   const handleEditSubsection = async () => {
     const currentValues = getValues();
     const formData = new FormData();
-    formData.append("sectionId", modalData.sectionId);
-    formData.append("subSectionId", modalData._id);
+    formData.append("sectionId", modalData.sectionId)
+    formData.append("subSectionId", modalData._id)
     formData.append("title", currentValues.lectureTitle);
     formData.append("description", currentValues.lectureDesc);
     formData.append("video", currentValues.lectureVideo);
-
+    console.log("looooo->",currentValues.lectureDesc);
     setLoading(true);
-    const result = await updateSection(formData, token);
-
+    const result = await updateSubSection(formData, token);
+    console.log("resulttt->", result);
     if(result){
-      dispatch(setCourse(result));
+      const updatedCourseContent = course.courseContent.map((section) =>
+        section._id === modalData.sectionId ? result : section
+      )
+      const updatedCourse = { ...course, courseContent: updatedCourseContent }
+      dispatch(setCourse(updatedCourse));
     }
     setModalData(null);
     setLoading(false);
@@ -88,9 +92,12 @@ const SubSectionModal = ({
     setLoading(true);
 
     const result = await createSubSection(formData, token);
-
     if(result){
-      dispatch(setCourse(result));
+      const updatedCourseContent = course.courseContent.map((section) =>
+        section._id === modalData ? result : section
+      )
+      const updatedCourse = { ...course, courseContent: updatedCourseContent }
+      dispatch(setCourse(updatedCourse))
     }
     setModalData(null);
     setLoading(false);
@@ -116,24 +123,26 @@ const SubSectionModal = ({
                     editData={edit ? modalData.videoUrl: null}
                 />
                 <div>
-                    <label>Lecture Title</label>
+                    <label>Lecture Title {!view && <sup className="text-pink-200">*</sup>}</label>
                     <input 
+                        disabled={view || loading}
                         id='lectureTitle'
                         placeholder='Enter Lecture Title'
                         {...register("lectureTitle", {required:true})}
-                        className='w-full'
+                        className='w-full form-style rounded-[0.5rem] bg-richblack-700 p-[12px] text-richblack-5'
                     />
                     {errors.lectureTitle && (<span>
                         Lecture Title is required
                     </span>)}
                 </div>
                 <div>
-                    <label>Lecture Description</label>
+                    <label>Lecture Description {!view && <sup className="text-pink-200">*</sup>}</label>
                     <textarea 
+                        disabled={view || loading}
                         id='lectureDesc'
                         placeholder='Enter Lecture Description'
                         {...register("lectureDesc", {required:true})}
-                        className='w-full min-h-[130px]'
+                        className='w-full min-h-[130px] form-style rounded-[0.5rem] bg-richblack-700 p-[12px] text-richblack-5'
                     />
                     {
                         errors.lectureDesc && (<span>

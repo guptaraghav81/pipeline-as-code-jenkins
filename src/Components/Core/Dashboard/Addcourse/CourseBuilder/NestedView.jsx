@@ -34,7 +34,11 @@ const NestedView = ({handleChangeSectionName}) => {
  const handleDeleteSubSection = async (subSectionId, sectionId) => {
   const result = await deleteSubSection({subSectionId, sectionId},token);
   if(result){
-    dispatch(setCourse(result));
+    const updatedCourseContent = course.courseContent.map((section) =>
+      section._id === sectionId ? result : section
+    )
+    const updatedCourse = { ...course, courseContent: updatedCourseContent }
+    dispatch(setCourse(updatedCourse));
   }
   setConfirmationModal(null);
  }
@@ -90,7 +94,7 @@ const NestedView = ({handleChangeSectionName}) => {
                                     <p>{data.title}</p>
                                 </div>
 
-                                <div
+                                <div onClick={(e) => e.stopPropagation()}
                                 className='flex items-center gap-x-3'>
 
                                     <button
