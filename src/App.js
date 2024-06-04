@@ -20,6 +20,9 @@ import Cart from "./Components/Core/Dashboard/Cart/index";
 import { ACCOUNT_TYPE } from "./utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import AddCourse from "./Components/Core/Dashboard/Addcourse";
+import Mycourses from "./Components/Core/Dashboard/Mycourses";
+import EditCourse from "./Components/Core/Dashboard/EditCourse/EditCourse";
+import Catalog from "./pages/Catalog";
 function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -30,6 +33,7 @@ function App() {
       <NavBar/>
       <Routes>
         <Route path="/" element={<Home/>}></Route>
+        <Route path="/catalog/:catalogName" element={<Catalog/>}></Route>
         <Route path="/error" element={<Error/>}></Route>
         <Route path="login" element={
           <OpenRoute>
@@ -87,6 +91,8 @@ function App() {
           user?.accountType === ACCOUNT_TYPE.INSTRUCTOR && (
           <>
           <Route path="dashboard/add-course" element={<AddCourse/>}></Route>
+          <Route path="dashboard/my-courses" element={<Mycourses />} />
+          <Route path="dashboard/edit-course/:courseId" element={<EditCourse />} />
           </>
             )
           }

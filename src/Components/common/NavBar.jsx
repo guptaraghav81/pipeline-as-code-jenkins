@@ -10,39 +10,27 @@ import { apiConnector } from '../../services/apiConnector'
 import { categories } from '../../services/apis'
 import { FaCircleChevronDown } from "react-icons/fa6";
 
-const subLinks= [
-    {
-        title:"python",
-        link:"/catelog/python",
-    },
-    {
-        title:"java",
-        link:"/catelog/java",
-    },
-    {
-        title:"reactJs",
-        link:"/catelog/reactJs",
-    },
-]
 const NavBar = () => {
 
     const {token} = useSelector((state) => state.auth);
     const {user} = useSelector((state) => state.profile);
     const {totalItems} = useSelector((state) => state.cart);
 
-    // const [subLinks, setSubLinks] = useState([]);
-    // const fetchSubLinks = async() => {
-    //     try {
-    //         const result = await apiConnector("GET", categories.CATEGORIES_API);
-    //         console.log("PRINTING SUBLINKS RESULT: ", result);
-    //         setSubLinks(result.data.data);
-    //     } catch (error) {
-    //         console.log("Coudn't fetch Category List");
-    //     }
-    // }
-    // useEffect(() => {
-    //     fetchSubLinks();
-    // },[])
+    const [subLinks, setSubLinks] = useState([])
+    const [loading, setLoading] = useState(false)
+
+    useEffect(() => {
+        ;(async () => {
+          setLoading(true)
+          try {
+            const res = await apiConnector("GET", categories.CATEGORIES_API)
+            setSubLinks(res.data.data)
+          } catch (error) {
+            console.log("Could not fetch Categories.", error)
+          }
+          setLoading(false)
+        })()
+      }, [])
 
     const location = useLocation();
     const matchRoute = (route) => {
@@ -72,8 +60,10 @@ const NavBar = () => {
                                                     subLinks.length ? (
                                                             subLinks.map((subLink, index) => {
                                                                 return (
-                                                                    <Link to={`${subLink.link}`} key={index}>
-                                                                        <p className='bg-white font-bold hover:bg-yellow-200 py-2 pl-3 rounded-tr-xl rounded-bl-xl text-richblack-800 hover:text-white shadow-sm shadow-caribbeangreen-600 mt-1'>{subLink.title}</p>
+                                                                    <Link to={`/catalog/${subLink.name.split(" ")
+                                                                    .join("-")
+                                                                    .toLowerCase()}`} key={index}>
+                                                                        <p className='bg-white font-bold hover:bg-yellow-200 py-2 pl-3 rounded-tr-xl rounded-bl-xl text-richblack-800 hover:text-white shadow-sm shadow-caribbeangreen-600 mt-1'>{subLink.name}</p>
                                                                     </Link>
                                                                 )
                                                             })
