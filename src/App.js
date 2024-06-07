@@ -23,6 +23,7 @@ import AddCourse from "./Components/Core/Dashboard/Addcourse";
 import Mycourses from "./Components/Core/Dashboard/Mycourses";
 import EditCourse from "./Components/Core/Dashboard/EditCourse/EditCourse";
 import Catalog from "./pages/Catalog";
+import CourseDetails from "./pages/CourseDetails";
 function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -34,7 +35,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Home/>}></Route>
         <Route path="/catalog/:catalogName" element={<Catalog/>}></Route>
+        <Route path="/courses/:courseId" element={<CourseDetails/>}></Route>
         <Route path="/error" element={<Error/>}></Route>
+
         <Route path="login" element={
           <OpenRoute>
             <Login/>
