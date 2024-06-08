@@ -1,14 +1,19 @@
 import React from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { buyCourse } from '../services/operations/studentFeaturesAPI';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const CourseDetails = () => {
 
     const {token} = useSelector((state) => state.auth);
     const {user} = useSelector((state) => state.profile);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const courseId = useParams();
     const handleBuyCourse = () => {
         
         if(token) {
-            // buyCourse(token, [courseId], user, navigate, dispatch);
+            buyCourse(token, [courseId], user, navigate, dispatch);
             return;
         }
     }
