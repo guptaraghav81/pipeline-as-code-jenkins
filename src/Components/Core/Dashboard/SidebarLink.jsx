@@ -1,6 +1,7 @@
 import React from 'react'
 import * as Icons from "react-icons/vsc"
 import { useDispatch } from 'react-redux';
+import { FaShoppingCart } from "react-icons/fa";
 import { NavLink, matchPath, useLocation } from 'react-router-dom';
 const SidebarLink = ({link, IconName}) => {
     const Icon = Icons[IconName];
@@ -21,12 +22,17 @@ const SidebarLink = ({link, IconName}) => {
         ${matchRoute(link.path) ? " opacity-100": " opacity-0"}`}>
 
         </span>
-
+        {
+          IconName == "FaShoppingCart " ? (<div className='flex item-center gap-x-2'>
+            <FaShoppingCart className="text-lg" />
+            <span>{link.name}</span>
+        </div>) : (
         <div className='flex item-center gap-x-2'>
-
             <Icon className="text-lg" />
             <span>{link.name}</span>
         </div>
+          )
+}
     </NavLink>
     
   )
