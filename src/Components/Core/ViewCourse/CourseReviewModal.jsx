@@ -9,46 +9,43 @@ const CourseReviewModal = ({setReviewModal}) => {
     const {user} = useSelector((state)=>state.profile);
     const {token} = useSelector((state) => state.auth);
     const {courseEntireData} = useSelector((state)=> state.viewCourse);
+console.log(courseEntireData);
+const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: {errors},
+} = useForm();
 
-    const {
-        register,
-        handleSubmit,
-        setValue,
-        formState: {errors},
-    } = useForm();
+useEffect(()=> {
+    setValue("courseExperience", "");
+    setValue("courseRating", 0);
+},[])
 
-    useEffect(()=> {
-        setValue("courseExperience", "");
-        setValue("courseRating", 0);
-    },[])
+const ratingChanged = (newRating) => {
+    setValue("courseRating", newRating);
+}
 
-    const ratingChanged = (newRating) => {
-        setValue("courseRating", newRating);
-    }
-
-    const onSubmit = async(data) => {
-        await createRating(
-            {
-                courseId:courseEntireData._id,
-                rating:data.courseRating,
-                review:data.courseExperience,
-            },
-            token
-        );
-        setReviewModal(false);
-    }
-
+const onSubmit = async(data) => {
+    await createRating(
+        {
+            courseId:courseEntireData._id,
+            rating:data.courseRating,
+            review:data.courseExperience,
+        },
+        token
+    );
+    setReviewModal(false);
+}
+console.log("kkkkk");
   return (
     <div className='text-richblack-5'>
-        <div>
+        hiiiiiiii
+        <div className='text-richblack-5'>
             {/* Modal header */}
             <div>
                 <p>Add Review</p>
-                <button 
-                onClick={setReviewModal(false)}
-                >
-                    Close
-                </button>
+                <button onClick={() => setReviewModal(false)}>Close</button>
             </div>
 
             {/* Modal Body */}
@@ -70,8 +67,7 @@ const CourseReviewModal = ({setReviewModal}) => {
                 <form
                 onSubmit={handleSubmit(onSubmit)}
                 className='mt-6 flex flex-col items-center'>
-
-                    <ReactStars
+                    <ReactStars 
                         count={5}
                         onChange={ratingChanged}
                         size={24}
@@ -103,7 +99,7 @@ const CourseReviewModal = ({setReviewModal}) => {
                         >
                             Cancel
                         </button>
-                        <ModalBtn 
+                        <ModalBtn
                             text="save"
                         />
                     </div>

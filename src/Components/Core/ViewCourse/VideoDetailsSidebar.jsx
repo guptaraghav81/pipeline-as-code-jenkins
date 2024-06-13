@@ -50,8 +50,9 @@ const VideoDetailsSidebar = ({setReviewModal}) => {
 
                     <div>
                         <ModalBtn 
+                        customClasses={"bg-yellow-50"}
                             text="Add Review"
-                            onClick={() => setReviewModal(true)}
+                            onclick={() => setReviewModal(true)}
                         />
                     </div>
 
