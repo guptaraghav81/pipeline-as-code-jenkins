@@ -26,6 +26,7 @@ import Catalog from "./pages/Catalog";
 import CourseDetails from "./pages/CourseDetails";
 import ViewCourse from "./pages/ViewCourse";
 import VideoDetails from "./Components/Core/ViewCourse/VideoDetails";
+import InstructorDashboard from "./Components/Core/Dashboard/InstructorDashboard/InstructorDashboard";
 function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -97,6 +98,7 @@ function App() {
           <>
           <Route path="dashboard/add-course" element={<AddCourse/>}></Route>
           <Route path="dashboard/my-courses" element={<Mycourses />} />
+          <Route path="dashboard/instructor" element={<InstructorDashboard />} />
           <Route path="dashboard/edit-course/:courseId" element={<EditCourse />} />
           </>
             )
