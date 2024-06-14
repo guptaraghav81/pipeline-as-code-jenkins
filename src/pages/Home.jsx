@@ -11,6 +11,7 @@ import LearningLanguageSection from "../Components/Core/HomePage/LearningLanguag
 import InstructorSection from "../Components/Core/HomePage/InstructorSection";
 import Footer from "../Components/common/Footer";
 import ExploreMore from "../Components/Core/HomePage/ExploreMore";
+import ReviewSlider from "../Components/common/ReviewSlider";
 const Home = () => {
     return (
         <div>
@@ -157,10 +158,12 @@ const Button = ({children, active}) => {
           {/* Section 3 */}
           <div className="relative mx-auto flex flex-col w-11/12 max-w-maxContent items-center text-white justify-between">
             <InstructorSection/>
-            <h2>Reviews from Other Learners</h2>
-            {/* Revier Slider */}
-
           </div>
+
+          <div className="mx-auto w-10/12">
+          <h2 className="text-4xl text-center text-richblack-5 mt-20"><HighLightedText text={"Reviews from Other Learners"}/></h2>
+            <ReviewSlider/>
+            </div>
           
           {/* Section 4 */}
           <Footer/>
