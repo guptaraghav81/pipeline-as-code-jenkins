@@ -1,5 +1,5 @@
 import React from 'react'
-// import copy from "copy-to-clipboard"
+import copy from "copy-to-clipboard"
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { ACCOUNT_TYPE } from '../../../utils/constants';
@@ -18,10 +18,10 @@ const CourseDetailsCard = ({course, setConfirmationModal, handleBuyCourse}) => {
         price: CurrentPrice,
 
     } = course;
-    // const handleShare = () => {
-    //     copy(window.location.href)
-    //     toast.success("Link copied to clipboard")
-    //   }
+    const handleShare = () => {
+        copy(window.location.href)
+        toast.success("Link copied to clipboard")
+      }
     const handleAddToCart = async ()=>{
         if(user && user?.accountType === ACCOUNT_TYPE.INSTRUCTOR) {
             toast.error("You are an Instructor, you cant buy a course");
@@ -42,19 +42,19 @@ const CourseDetailsCard = ({course, setConfirmationModal, handleBuyCourse}) => {
         })
     }
   return (
-    <div>
+    <div className='flex flex-col mr-10 gap-5'>
                     <img 
                 src={thumbNail}
                 alt='Thumbnail Image'
                 className='max-h-[300px] min-h-[180px] w-[400px] rounded-xl'
             />
-            <div>
-            <div>
+            <div className='flex flex-col gap-4'>
+            <div className='text-richblack-5 text-lg'>
                 Rs. {CurrentPrice}
             </div>
             <div className='flex flex-col gap-y-6'>
                 <button
-                 className='bg-yellow-50 w-fit text-richblack-900'
+                 className='bg-yellow-50 w-fit text-richblack-900 font-semibold px-2 py-1 rounded-lg'
                     onClick={
                         user && course?.studentsEnrolled.includes(user?._id)
                         ? ()=> navigate("/dashboard/enrolled-courses")
@@ -69,7 +69,7 @@ const CourseDetailsCard = ({course, setConfirmationModal, handleBuyCourse}) => {
                 {
                     (!course?.studentsEnrolled.includes(user?._id)) && (
                         <button onClick={handleAddToCart}  
-                        className='bg-yellow-50 w-fit text-richblack-900'>
+                        className='bg-yellow-50 w-fit text-richblack-900 rounded-md font-semibold px-3 py-1'>
                             Add to Cart
                         </button>
                     )
@@ -82,7 +82,7 @@ const CourseDetailsCard = ({course, setConfirmationModal, handleBuyCourse}) => {
           </div>
 
           <div className={``}>
-            <p className={`my-2 text-xl font-semibold `}>
+            <p className={`my-2 text-xl font-semibold text-richblack-5`}>
               This Course Includes :
             </p>
             <div className="flex flex-col gap-3 text-sm text-caribbeangreen-100">
@@ -99,7 +99,7 @@ const CourseDetailsCard = ({course, setConfirmationModal, handleBuyCourse}) => {
           <div className="text-center">
             <button
               className="mx-auto flex items-center gap-2 py-6 text-yellow-100 "
-            //   onClick={handleShare}
+              onClick={handleShare}
             >
               <FaShareSquare size={15} /> Share
             </button>
