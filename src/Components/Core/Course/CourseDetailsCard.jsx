@@ -56,18 +56,18 @@ const CourseDetailsCard = ({course, setConfirmationModal, handleBuyCourse}) => {
                 <button
                  className='bg-yellow-50 w-fit text-richblack-900 font-semibold px-2 py-1 rounded-lg'
                     onClick={
-                        user && course?.studentsEnrolled.includes(user?._id)
+                        user && course?.studentsEnroled.includes(user?._id)
                         ? ()=> navigate("/dashboard/enrolled-courses")
                         : handleBuyCourse
                     }
                 >
                     {
-                        user && course?.studentsEnrolled.includes(user?._id) ? "Go to Course ": "Buy Now"
+                        user && course?.studentsEnroled.includes(user?._id) ? "Go to Course ": "Buy Now"
                     }
                 </button>
 
                 {
-                    (!course?.studentsEnrolled.includes(user?._id)) && (
+                    (!course?.studentsEnroled.includes(user?._id)) && (
                         <button onClick={handleAddToCart}  
                         className='bg-yellow-50 w-fit text-richblack-900 rounded-md font-semibold px-3 py-1'>
                             Add to Cart

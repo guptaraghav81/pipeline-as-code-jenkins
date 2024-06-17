@@ -24,9 +24,10 @@ const InstructorDashboard = () => {
           setLoading(false)
         })()
       }, [])
+      console.log("datata is ->",courses);
       const totalAmount = instructorData?.reduce((acc,curr) => acc + curr.totalAmountGenerated, 0);
       const totalStudents = instructorData?.reduce((acc, curr) => acc + curr.totalStudentsEnrolled,0);
-
+      
   return (
     <div>
       <div className="space-y-2">
