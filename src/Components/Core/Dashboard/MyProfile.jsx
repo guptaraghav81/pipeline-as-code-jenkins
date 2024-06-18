@@ -20,7 +20,7 @@ const MyProfile = () => {
             </div>
             </div>
             {/* its work is just a simple button we can do anything don't go on name */}
-            <ModalBtn onclick={() => {
+            <ModalBtn customClasses={"bg-yellow-50 text-richblack-800"} onclick={() => {
                 return navigate("/dashboard/settings")
             }}>
                 <div className='flex items-center gap-1 text-lg'>
@@ -32,7 +32,9 @@ const MyProfile = () => {
         <div className='flex flex-col bg-richblack-800 py-8 px-8 rounded-tl-xl rounded-br-xl gap-4'>
             <div className='flex justify-between'>
                 <p className='text-xl font-semibold'>About</p>
-                <ModalBtn onclick={() => {
+                <ModalBtn
+                customClasses={"bg-yellow-50 text-richblack-800"}
+                 onclick={() => {
                  navigate("/dashboard/settings")
                  }}>
                 <div className='flex gap-1 items-center text-lg '>
@@ -48,7 +50,7 @@ const MyProfile = () => {
         <div className='flex flex-col bg-richblack-800 py-8 px-8 rounded-tl-xl rounded-br-xl gap-6'>
             <div className='flex justify-between'>
                 <p className='text-xl font-semibold'>Personal Details</p>
-                <ModalBtn onclick={() => {
+                <ModalBtn customClasses={"bg-yellow-50 text-richblack-800"} onclick={() => {
                 return navigate("/dashboard/settings")
             }}>
                 <div className='flex gap-1 items-center text-lg'>

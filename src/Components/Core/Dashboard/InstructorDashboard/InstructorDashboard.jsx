@@ -91,7 +91,7 @@ const InstructorDashboard = () => {
                     {courses.slice(0, 3).map((course) => (
                       <div key={course._id} className="w-1/3">
                         <img
-                          src={course.thumbNail}
+                          src={course.thumbnail}
                           alt={course.courseName}
                           className="h-[201px] w-full rounded-md object-cover"
                         />

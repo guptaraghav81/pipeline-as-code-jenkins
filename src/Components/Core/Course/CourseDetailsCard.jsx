@@ -14,7 +14,7 @@ const CourseDetailsCard = ({course, setConfirmationModal, handleBuyCourse}) => {
     const {token} = useSelector((state)=>state.auth);
     const dispatch = useDispatch();
     const {
-        thumbNail,
+        thumbnail,
         price: CurrentPrice,
 
     } = course;
@@ -44,7 +44,7 @@ const CourseDetailsCard = ({course, setConfirmationModal, handleBuyCourse}) => {
   return (
     <div className='flex flex-col mr-10 gap-5'>
                     <img 
-                src={thumbNail}
+                src={thumbnail}
                 alt='Thumbnail Image'
                 className='max-h-[300px] min-h-[180px] w-[400px] rounded-xl'
             />

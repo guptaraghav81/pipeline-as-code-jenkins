@@ -1,129 +1,132 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from "react"
 import { BiInfoCircle } from "react-icons/bi"
-// import { ReactMarkdown } from "react-markdown/lib/react-markdown"
-import ReactMarkdown from 'react-markdown';
-
 import { HiOutlineGlobeAlt } from "react-icons/hi"
-import CourseAccordionBar from "../Components/Core/Course/CourseAccordionBar"
-import { buyCourse } from '../services/operations/studentFeaturesAPI';
-import { useNavigate, useParams } from 'react-router-dom';
-import GetAvgRating from '../utils/avgRating';
-import { fetchCourseDetails } from '../services/operations/courseDetailsAPI';
-import Error from "./Error"
-import RatingStars from "../Components/common/RatingStars"
+// import { ReactMarkdown } from "react-markdown"
+import { useDispatch, useSelector } from "react-redux"
+import { useNavigate, useParams } from "react-router-dom"
+
 import ConfirmationModal from "../Components/common/ConfirmationModal"
-import {formatDate} from "../services/formDate"
-import CourseDetailsCard from '../Components/Core/Course/CourseDetailsCard';
-const CourseDetails = () => {
-    const { user } = useSelector((state) => state.profile)
-    const { token } = useSelector((state) => state.auth)
-    const { loading } = useSelector((state) => state.profile)
-    const { paymentLoading } = useSelector((state) => state.course)
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
-  
-    // Getting courseId from url parameter
-    const { courseId } = useParams()
-    // console.log(`course id: ${courseId}`)
-  
-    // Declear a state to save the course details
-    const [response, setResponse] = useState(null)
-    const [confirmationModal, setConfirmationModal] = useState(null)
-    useEffect(() => {
-      // Calling fetchCourseDetails fucntion to fetch the details
-      ;(async () => {
-        try {
-          const res = await fetchCourseDetails(courseId)
-          // console.log("course details res: ", res)
-          setResponse(res)
-        } catch (error) {
-          console.log("Could not fetch Course Details")
-        }
-      })()
-    }, [courseId])
-  
-    // console.log("response: ", response)
-  
-    // Calculating Avg Review count
-    const [avgReviewCount, setAvgReviewCount] = useState(0)
-    useEffect(() => {
-      const count = GetAvgRating(response?.data?.courseDetails.ratingAndReviews)
-      setAvgReviewCount(count)
-    }, [response])
-    // console.log("avgReviewCount: ", avgReviewCount)
-  
-    // // Collapse all
-    // const [collapse, setCollapse] = useState("")
-    const [isActive, setIsActive] = useState(Array(0))
-    const handleActive = (id) => {
-      // console.log("called", id)
-      setIsActive(
-        !isActive.includes(id)
-          ? isActive.concat([id])
-          : isActive.filter((e) => e != id)
-      )
-    }
-  
-    // Total number of lectures
-    const [totalNoOfLectures, setTotalNoOfLectures] = useState(0)
-    useEffect(() => {
-      let lectures = 0
-      response?.data?.courseDetails?.courseContent?.forEach((sec) => {
-        lectures += sec.subSection.length || 0
-      })
-      setTotalNoOfLectures(lectures)
-    }, [response])
-  
-    if (loading || !response) {
-      return (
-        <div className="grid min-h-[calc(100vh-3.5rem)] place-items-center">
-          <div className="spinner"></div>
-        </div>
-      )
-    }
-    if (!response.success) {
-      return <Error />
-    }
-    //just destructuring so that we dont have to write the complete {{courseData.data?.courseDetails}} this thing
-    const {
-        _id: course_id,
-        courseName,
-        courseDescription,
-        thumbNail:thumbnail,
-        price,
-        whatYouWillLearn,
-        courseContent,
-        ratingAndReviews,
-        instructor,
-        studentsEnrolled,
-        createdAt,
-    } = response.data?.courseDetails;
-    const handleBuyCourse = () => {
-        if (token) {
-          buyCourse(token, [courseId], user, navigate, dispatch)
-          return
-        }
-        setConfirmationModal({
-          text1: "You are not logged in!",
-          text2: "Please login to Purchase Course.",
-          btn1Text: "Login",
-          btn2Text: "Cancel",
-          btn1Handler: () => navigate("/login"),
-          btn2Handler: () => setConfirmationModal(null),
-        })
+import Footer from "../Components/common/Footer"
+import RatingStars from "../Components/common/RatingStars"
+import CourseAccordionBar from "../Components/Core/Course/CourseAccordionBar"
+import CourseDetailsCard from "../Components/Core/Course/CourseDetailsCard"
+import { formatDate } from "../services/formDate"
+import { fetchCourseDetails } from "../services/operations/courseDetailsAPI"
+import { BuyCourse } from "../services/operations/studentFeaturesAPI"
+import GetAvgRating from "../utils/avgRating"
+import Error from "./Error"
+
+function CourseDetails() {
+  const { user } = useSelector((state) => state.profile)
+  const { token } = useSelector((state) => state.auth)
+  const { loading } = useSelector((state) => state.profile)
+  const { paymentLoading } = useSelector((state) => state.course)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  // Getting courseId from url parameter
+  const { courseId } = useParams()
+  // console.log(`course id: ${courseId}`)
+
+  // Declear a state to save the course details
+  const [response, setResponse] = useState(null)
+  const [confirmationModal, setConfirmationModal] = useState(null)
+  useEffect(() => {
+    // Calling fetchCourseDetails fucntion to fetch the details
+    ;(async () => {
+      try {
+        const res = await fetchCourseDetails(courseId)
+        // console.log("course details res: ", res)
+        setResponse(res)
+      } catch (error) {
+        console.log("Could not fetch Course Details")
       }
-    
-      if (paymentLoading) {
-        // console.log("payment loading")
-        return (
-          <div className="grid min-h-[calc(100vh-3.5rem)] place-items-center">
-            <div className="spinner"></div>
-          </div>
-        )
-      }
+    })()
+  }, [courseId])
+
+  // console.log("response: ", response)
+
+  // Calculating Avg Review count
+  const [avgReviewCount, setAvgReviewCount] = useState(0)
+  useEffect(() => {
+    const count = GetAvgRating(response?.data?.courseDetails.ratingAndReviews)
+    setAvgReviewCount(count)
+  }, [response])
+  // console.log("avgReviewCount: ", avgReviewCount)
+
+  // // Collapse all
+  // const [collapse, setCollapse] = useState("")
+  const [isActive, setIsActive] = useState(Array(0))
+  const handleActive = (id) => {
+    // console.log("called", id)
+    setIsActive(
+      !isActive.includes(id)
+        ? isActive.concat([id])
+        : isActive.filter((e) => e != id)
+    )
+  }
+
+  // Total number of lectures
+  const [totalNoOfLectures, setTotalNoOfLectures] = useState(0)
+  useEffect(() => {
+    let lectures = 0
+    response?.data?.courseDetails?.courseContent?.forEach((sec) => {
+      lectures += sec.subSection.length || 0
+    })
+    setTotalNoOfLectures(lectures)
+  }, [response])
+
+  if (loading || !response) {
     return (
-    <div>
+      <div className="grid min-h-[calc(100vh-3.5rem)] place-items-center">
+        <div className="spinner"></div>
+      </div>
+    )
+  }
+  if (!response.success) {
+    return <Error />
+  }
+
+  const {
+    _id: course_id,
+    courseName,
+    courseDescription,
+    thumbnail,
+    price,
+    whatYouWillLearn,
+    courseContent,
+    ratingAndReviews,
+    instructor,
+    studentsEnroled,
+    createdAt,
+  } = response.data?.courseDetails
+
+  const handleBuyCourse = () => {
+    if (token) {
+      BuyCourse(token, [courseId], user, navigate, dispatch)
+      return
+    }
+    setConfirmationModal({
+      text1: "You are not logged in!",
+      text2: "Please login to Purchase Course.",
+      btn1Text: "Login",
+      btn2Text: "Cancel",
+      btn1Handler: () => navigate("/login"),
+      btn2Handler: () => setConfirmationModal(null),
+    })
+  }
+
+  if (paymentLoading) {
+    // console.log("payment loading")
+    return (
+      <div className="grid min-h-[calc(100vh-3.5rem)] place-items-center">
+        <div className="spinner"></div>
+      </div>
+    )
+  }
+
+  return (
+    <>
       <div className={`relative w-full bg-richblack-800`}>
         {/* Hero Section */}
         <div className="mx-auto box-content px-4 lg:w-[1260px] 2xl:relative ">
@@ -149,7 +152,7 @@ const CourseDetails = () => {
                 <span className="text-yellow-25">{avgReviewCount}</span>
                 <RatingStars Review_Count={avgReviewCount} Star_Size={24} />
                 <span>{`(${ratingAndReviews.length} reviews)`}</span>
-                <span>{`${studentsEnrolled.length} students enrolled`}</span>
+                <span>{`${studentsEnroled.length} students enrolled`}</span>
               </div>
               <div>
                 <p className="">
@@ -193,7 +196,7 @@ const CourseDetails = () => {
           <div className="my-8 border border-richblack-600 p-8">
             <p className="text-3xl font-semibold">What you'll learn</p>
             <div className="mt-5">
-              <ReactMarkdown>{whatYouWillLearn}</ReactMarkdown>
+              {whatYouWillLearn}
             </div>
           </div>
 
@@ -256,8 +259,9 @@ const CourseDetails = () => {
           </div>
         </div>
       </div>
-        {confirmationModal && <ConfirmationModal/>}
-    </div>
+      <Footer />
+      {confirmationModal && <ConfirmationModal modalData={confirmationModal} />}
+    </>
   )
 }
 

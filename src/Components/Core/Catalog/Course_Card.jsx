@@ -23,7 +23,7 @@ const Course_Card = ({course, Height}) => {
         <div className="">
           <div className="rounded-lg">
             <img
-              src={course?.thumbNail}
+              src={course?.thumbnail}
               alt="course thumbnail"
               className={`${Height} w-full rounded-xl object-cover `}
             />

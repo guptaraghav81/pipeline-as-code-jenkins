@@ -68,7 +68,7 @@ const CourseTable = ({ courses, setCourses }) => {
               >
                 <Td className="flex flex-1 gap-x-4">
                   <img
-                    src={course?.thumbNail}
+                    src={course?.thumbnail}
                     alt={course?.courseName}
                     className="h-[148px] w-[220px] rounded-lg object-cover"
                   />

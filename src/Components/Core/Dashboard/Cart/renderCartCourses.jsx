@@ -18,7 +18,7 @@ const RenderCartCourses = () => {
           >
             <div className="flex flex-1 flex-col gap-4 xl:flex-row">
               <img
-                src={course?.thumbNail}
+                src={course?.thumbnail}
                 alt={course?.courseName}
                 className="h-[148px] w-[220px] rounded-lg object-cover"
               />

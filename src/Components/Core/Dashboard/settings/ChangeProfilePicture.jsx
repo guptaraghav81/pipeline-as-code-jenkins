@@ -84,6 +84,7 @@ export default function ChangeProfilePicture() {
                 Select
               </button>
               <IconBtn 
+              customClasses={"bg-yellow-50 text-richblack-800"}
                 text={loading ? "Uploading..." : "Upload"}
                 properties={"flex gap-2 items-center"}
                 onclick={handleFileUpload}

@@ -56,7 +56,7 @@ const EnrolledCourses = () => {
                 }}
               >
                 <img
-                  src={course.thumbNail}
+                  src={course.thumbnail}
                   alt="course_img"
                   className="h-14 w-14 rounded-lg object-cover"
                 />
