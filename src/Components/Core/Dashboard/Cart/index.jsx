@@ -22,7 +22,7 @@ export default function Cart() {
       </p>
       {total > 0 ? (
         <div className="mt-8 flex flex-col-reverse items-start gap-x-10 gap-y-6 lg:flex-row">
-          <RenderCartCourses />
+          <RenderCartCourses/>
           <RenderTotalAmount />
         </div>
       ) : (
