@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import HighLightedText from "../Components/Core/HomePage/HighLightedText";
 import HighLightedText2 from "../Components/Core/HomePage/HighLightedText2";
 import CTAButton from "../Components/Core/HomePage/Button";
-import Banner from "../assets/Images/banner.mp4"
+import Banner from "../assets/Images/HeroVideoBanner.mp4"
 import CodeBlocks from "../Components/Core/HomePage/CodeBlocks";
 import "../App.css"
 import TimelineSection from "../Components/Core/HomePage/TimelineSection";
@@ -12,27 +12,30 @@ import InstructorSection from "../Components/Core/HomePage/InstructorSection";
 import Footer from "../Components/common/Footer";
 import ExploreMore from "../Components/Core/HomePage/ExploreMore";
 import ReviewSlider from "../Components/common/ReviewSlider";
+import "../App.css"
 const Home = () => {
     return (
-        <div>
+        <div className="">
           {/* Section 1 */}
-          <div className="relative mx-auto flex flex-col w-11/12 max-w-maxContent items-center text-white justify-between">
+          <div className="relative mx-auto flex flex-col w-11/12 max-w-maxContent items-center  text-white justify-between">
 
             {/* Instructor Button */}
+            <div className="flex mt-20 mb-18 ">
+              <div className="flex flex-col w-[70%] items-start">
             <Link to={"/signup"}>
               <div className="group mt-12 p-1 mx-auto rounded-full bg-richblack-800 font-bold text-richblack-200 transition-all duration-200 hover:scale-95 w-fit">
                 <div className="flex flex-row items-center gap-2 px-11 py-[5px] rounded-full transition-all duration-200 group-hover:bg-richblack-900">
-                  <p>Become an Instructor</p>
+                  <p className="items-start">Become an Instructor</p>
                   <FaArrowRight />
                 </div>
               </div>
             </Link>
             {/* Heading */}
-            <div className="text-center text-4xl font-semibold mt-6">
+            <div className=" text-4xl font-semibold mt-6">
               Empower your Future with <HighLightedText text={"Coding Skills"}/>
             </div>
             {/* SubHeading */}
-            <div className="w-[85%] text-semibold text-center mt-6 text-richblack-300">
+            <div className="w-[85%] text-semibold mt-6 text-richblack-300 gradient-to-br from-[#833AB4] via-[#FD1D1D] to-[#FCB045]">
               With our online coding courses, you can learn at your own pace, from anywhere in the world, and get access to a wealth of resources, including hands-on projects, quizzes, and personalized feedback from instructors.
             </div>
             {/* Buttons */}
@@ -41,12 +44,13 @@ const Home = () => {
               <CTAButton active={false} Linkto={"/login"}>Book a Demo</CTAButton>
             </div>
             {/* Video */}
+            </div>
             <div className="w-[82%]  mx-3 my-11 shadow-2xl shadow-blue-400">
               <video muted loop autoPlay>
                 <source src={Banner} type="video/mp4" />
               </video>
             </div>
-
+            </div>
             {/* Code Section 1 */}
             <div className="w-[93%]">
               <CodeBlocks

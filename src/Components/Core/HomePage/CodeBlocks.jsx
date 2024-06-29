@@ -7,7 +7,7 @@ import { TypeAnimation } from 'react-type-animation';
 
 const CodeBlocks = ({position, heading, subHeading, ctabtn1, ctabtn2, codeblock, backgroundGradient, codeColor}) => {
   return (
-    <div className={`flex ${position} my-20 justify-center gap-10`}>
+    <div className={`flex ${position} my-20 justify-center flex-col lg:gap-10 gap-10 items-center`}>
         {/* Section1 */}
         <div className='w-[50%] flex flex-col gap-8'>
             {heading}
