@@ -17,10 +17,10 @@ const Home = () => {
     return (
         <div className="">
           {/* Section 1 */}
-          <div className="relative mx-auto flex flex-col w-11/12 max-w-maxContent items-center  text-white justify-between">
+          <div className="relative mx-auto flex flex-col w-11/12 max-w-maxContent items-center text-white justify-between">
 
             {/* Instructor Button */}
-            <div className="flex mt-20 mb-18 ">
+            <div className="flex mt-6 lg:mt-20 mb-18 lg:flex-row flex-col items-center w-full">
               <div className="flex flex-col w-[70%] items-start">
             <Link to={"/signup"}>
               <div className="group mt-12 p-1 mx-auto rounded-full bg-richblack-800 font-bold text-richblack-200 transition-all duration-200 hover:scale-95 w-fit">
@@ -45,8 +45,8 @@ const Home = () => {
             </div>
             {/* Video */}
             </div>
-            <div className="w-[82%]  mx-3 my-11 shadow-2xl shadow-blue-400">
-              <video muted loop autoPlay>
+            <div className="w-[70%] mx-3 my-11 shadow-2xl shadow-blue-400 h-fit">
+              <video muted loop autoPlay className="w-full h-full">
                 <source src={Banner} type="video/mp4" />
               </video>
             </div>
@@ -142,18 +142,20 @@ const Button = ({children, active}) => {
             </div>
 
             <div className="relative mx-auto flex flex-col w-11/12 max-w-maxContent items-center justify-between mt-10">
-              <div className="flex justify-between">
-                <div className="text-4xl font-semibold w-[50%]">
-                Get the Skills you need for a <HighLightedText2 text={"Job that is in demand"}/>
-                </div>
-                <div className="flex flex-col w-[45%] gap-7 items-start">
-                  <div className="font-bold text-lg">
-                  The modern StudyNotion is the dictates its own terms. Today, to be a competitive specialist requires more than professional skills.
-                  </div>
-                  <CTAButton Linkto={"/login"} active={true}>Learn More</CTAButton>
-                </div>
-              </div>
-            </div>
+      <div className="flex flex-col lg:flex-row justify-between items-center">
+        <div className="text-center lg:text-left lg:w-1/2">
+          <div className="text-4xl font-semibold">
+            Get the Skills you need for a <HighLightedText2 text={"Job that is in demand"} />
+          </div>
+          <div className="font-bold text-lg mt-4">
+            The modern Coding & Coffee is the dictates its own terms. Today, to be a competitive specialist requires more than professional skills.
+          </div>
+        </div>
+        <div className="flex flex-col lg:w-1/2 mt-6 lg:mt-0 lg:pl-8 gap-7 items-center lg:items-start">
+          <CTAButton Linkto={"/login"} active={true}>Learn More</CTAButton>
+        </div>
+      </div>
+    </div>
 
             <TimelineSection/>
             <LearningLanguageSection/>

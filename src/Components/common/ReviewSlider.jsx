@@ -20,11 +20,28 @@ const ReviewSlider = () => {
           }
         })()
       }, [])
+      const [slides,setslides] = useState(4);
+      useEffect(()=>{
+        window.addEventListener('resize', ()=>{
+
+          if(window.innerWidth<768){
+            setslides(1);
+          }
+          else if(window.innerWidth>=768 && window.innerWidth<1024){
+            setslides(2);
+          }
+          else{
+            setslides(4);
+          }
+
+
+        })
+      })
   return (
     <div className="text-white">
-    <div className="my-[50px] h-[190px] max-w-maxContentTab lg:max-w-maxContent">
+    <div className="my-[50px] h-[190px] max-w-maxContentTab lg:max-w-maxContent mx-auto">
       <Swiper
-        slidesPerView={4}
+        slidesPerView={slides}
         spaceBetween={25}
         loop={true}
         FreeMode={true}

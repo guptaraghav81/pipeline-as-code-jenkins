@@ -9,7 +9,7 @@ const CodeBlocks = ({position, heading, subHeading, ctabtn1, ctabtn2, codeblock,
   return (
     <div className={`flex ${position} my-20 justify-center flex-col lg:gap-10 gap-10 items-center`}>
         {/* Section1 */}
-        <div className='w-[50%] flex flex-col gap-8'>
+        <div className='w-[100%] lg:w-[50%] flex flex-col gap-8'>
             {heading}
             <div className='text-richblack-300 font-bold'>
             {subHeading}
@@ -29,7 +29,7 @@ const CodeBlocks = ({position, heading, subHeading, ctabtn1, ctabtn2, codeblock,
             </div>
         </div>
         {/* Section2 */}
-        <div className='w-[50%] flex h-fit shadow shadow-white p-4 '>
+        <div className='w-[100%] lg:w-[50%] flex h-fit shadow shadow-white p-4 '>
             <div className='w-[10%] text-center flex flex-col text-richblack-400 font-inter font-bold'>
                 <p>1</p>
                 <p>2</p>
