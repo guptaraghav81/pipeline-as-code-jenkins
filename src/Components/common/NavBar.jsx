@@ -136,9 +136,42 @@ const NavBar = () => {
             </div>
 
             {/* Mobile Menu */}
-            <div className={`fixed top-0 right-0 h-full w-64 bg-richblack-900 text-white z-40 transform ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'} transition-transform duration-300 lg:hidden`}>
-                <div className='flex justify-end p-4'>
+            <div className={`fixed top-0 right-0 h-full w-60 bg-richblack-900 text-white z-40 transform ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'} transition-transform duration-300 lg:hidden`}>
+                
+                <div className='w-[85%]  mx-auto flex justify-between items-center mt-6 '>
+                    {
+                        user && user.accountType !== "Instructor" && (
+                            <Link to="/dashboard/cart" className='relative text-white' onClick={toggleMobileMenu}>
+                                <MdShoppingCart className='w-8 h-5' />
+                                {
+                                    totalItems > 0 && (
+                                        <span className='absolute -right-2 -top-3 bg-green-600 rounded-full w-5 h-5 flex items-center justify-center'>{totalItems}</span>
+                                    )
+                                }
+                            </Link>
+                        )
+                    }
+
+                    {
+                        token === null && (
+                            <>
+                                <Link to="/login" onClick={toggleMobileMenu}>
+                                    <button className='bg-yellow-50 text-[14px] text-black px-[9px] py-[6px] rounded-md font-semibold hover:scale-95 transition-all duration-200'>Log in</button>
+                                </Link>
+                                <Link to="/signup" onClick={toggleMobileMenu}>
+                                    <button className='bg-richblack-800 text-[14px] px-[9px] py-[6px] text-white rounded-md font-semibold hover:scale-95 transition-all duration-200'>Sign Up</button>
+                                </Link>
+                            </>
+                        )
+                    }
+
+                    {
+                        token !== null && (
+                            <ProfileDropDown />
+                        )
+                    }
                     <HiOutlineX size={30} onClick={toggleMobileMenu} />
+                    
                 </div>
                 <nav className='flex flex-col p-4'>
                     <ul className='flex flex-col gap-y-4'>
@@ -172,40 +205,6 @@ const NavBar = () => {
                         }
                     </ul>
                 </nav>
-
-                <div className='flex flex-col gap-y-4 items-center mt-8'>
-                    {
-                        user && user.accountType !== "Instructor" && (
-                            <Link to="/dashboard/cart" className='relative text-white' onClick={toggleMobileMenu}>
-                                <MdShoppingCart className='w-8 h-5' />
-                                {
-                                    totalItems > 0 && (
-                                        <span className='absolute -right-2 -top-3 bg-green-600 rounded-full w-5 h-5 flex items-center justify-center'>{totalItems}</span>
-                                    )
-                                }
-                            </Link>
-                        )
-                    }
-
-                    {
-                        token === null && (
-                            <>
-                                <Link to="/login" onClick={toggleMobileMenu}>
-                                    <button className='bg-yellow-50 text-[14px] text-black px-[9px] py-[6px] rounded-md font-semibold hover:scale-95 transition-all duration-200'>Log in</button>
-                                </Link>
-                                <Link to="/signup" onClick={toggleMobileMenu}>
-                                    <button className='bg-richblack-800 text-[14px] px-[9px] py-[6px] text-white rounded-md font-semibold hover:scale-95 transition-all duration-200'>Sign Up</button>
-                                </Link>
-                            </>
-                        )
-                    }
-
-                    {
-                        token !== null && (
-                            <ProfileDropDown />
-                        )
-                    }
-                </div>
             </div>
         </div>
     )
