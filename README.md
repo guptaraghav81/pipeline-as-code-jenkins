@@ -1,78 +1,208 @@
-# Coding & Coffee: ⭐Build Feature E-learning platform designed to provide a seamless and engaging learning experience.
+<h1 align="center" id="title">PipelineX ~ Jenkins CI/CD Pipeline</h1>
 
-### This repository contains Complete Code for Coding & Coffee Application in MERN STACK.
+<p id="description">"PipelineX ~ Jenkins CI/CD Pipeline" is a powerful hands-on DevOps project to automate the build and deployment of a web application using Jenkins and Docker. It streamlines code integration, containerization, and deployment—empowering you with industry-grade CI/CD practices and automation using open-source tools.</p>
 
-For Demo and Final Code checkout following link👇:
+<p align="center">
+  <img src="https://img.shields.io/badge/Jenkins-Automation-red?logo=jenkins&logoColor=white" alt="Jenkins">
+  <img src="https://img.shields.io/badge/Docker-Containerized-blue?logo=docker&logoColor=white" alt="Docker">
+  <img src="https://img.shields.io/badge/CI/CD-Pipeline-success" alt="CI/CD">
+  <img src="https://img.shields.io/badge/Status-Active-brightgreen" alt="Status">
+</p>
 
-### [Coding & Coffee...](https://coding-coffee-ramneet.vercel.app/)
+---
+
+<h2>🚀 Demo</h2>
+
+🌐 **Live Domain**: [raghav.cloud](http://raghav.cloud) *(Deployed via Docker, DNS managed using AWS Route 53)*  
+⚠️ *Note: Jenkins triggers redeployment automatically on every code push to `main`.*
+> ⚠️ **Note:** Servers are currently turned off. The application may not be accessible until deployment is reactivated.
 
 
-#### Welcome to Coding & Coffee – an e-learning platform designed to provide a seamless and engaging learning experience. Built using the latest web technologies, our platform leverages the power of React, Node.js, Express.js, and MongoDB to deliver a robust and scalable Learning Management System (LMS).
+---
 
+<h2>📦 Project Structure & Tech Stack</h2>
+
+- **Node.js (Express)** – backend server
+- **React.js** – frontend interface
+- **MongoDB** – database
+- **Docker** – containerization
+- **Jenkins** – CI/CD automation
+- **DockerHub** – container image registry
+
+---
+
+<h2>🛠️ Jenkins Pipeline Workflow</h2>
+
+This project uses Jenkins for full CI/CD automation:
+
+- Jenkins watches the GitHub repo for new commits
+- On each push to the `main` branch:
+  - Jenkins checks out the code
+  - Installs dependencies
+  - Runs unit tests
+  - Builds a Docker image
+  - Pushes the image to DockerHub
+  - Deploys the app using Docker
+
+---
+
+<h2>📝 Jenkinsfile (Pipeline as Code)</h2>
+
+File: `Jenkinsfile`
+
+```groovy
+pipeline {
+    agent any
+
+    environment {
+        DOCKER_IMAGE = 'raghavgupta/mern-web-app'
+        DOCKER_CREDENTIALS_ID = 'dockerhub-credentials' // Jenkins credential ID
+    }
+
+    stages {
+        stage('Checkout Code') {
+            steps {
+                git branch: 'main', url: 'https://github.com/your-username/your-repo.git'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                sh 'npm install'
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                sh 'npm test'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                sh "docker build -t $DOCKER_IMAGE ."
+            }
+        }
+
+        stage('Push to DockerHub') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: "$DOCKER_CREDENTIALS_ID", usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                    sh 'echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin'
+                    sh "docker push $DOCKER_IMAGE"
+                }
+            }
+        }
+
+        stage('Deploy Container') {
+            steps {
+                sh "docker run -d -p 5000:5000 $DOCKER_IMAGE"
+            }
+        }
+    }
+}
+```
+<h2>🪛 Setup Instructions</h2>
+Install Jenkins (locally or use a Jenkins cloud instance).
+
+Install necessary plugins:<br>
+✅ Docker<br>
+✅ Git<br>
+✅ Pipeline<br>
+✅ Blue Ocean (for visual pipeline UI)
+
+Create Jenkins Credentials (username/password for DockerHub).
+
+Create a Freestyle or Multibranch Pipeline pointing to your GitHub repo.
+
+Add the Jenkinsfile to your repo root.
+
+Configure Webhooks to trigger Jenkins build on every push (GitHub → Repo → Settings → Webhooks).
+
+Ensure Docker is installed on the Jenkins host.
+
+<h2>📌 Dockerfile Example (Node App)</h2>
+File: `Dockerfile`
+
+```groovy
+FROM node:18-alpine
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+
+EXPOSE 5000
+CMD ["npm", "start"]
+```
+<h2>🧠 Learnings & Takeaway</h2>
+By completing this project, you’ll understand:
+
+✅ How Jenkins pipelines automate software build and deployment<br>
+✅ Containerizing apps using Docker<br>
+✅ Pushing images to DockerHub<br>
+✅ Real-world CI/CD processes for deployment readiness
+<h2>🧪 Testing Strategy</h2>
+Currently, the pipeline runs unit tests before building and deploying.
+
+Enhancements to consider:
+
+🔍 Code Linting using ESLint
+
+🧪 Integration tests with Supertest
+
+🌐 API tests via Postman/Newman
+
+🧪 E2E tests using Cypress
+
+<h2>🌐 Deployment Readiness</h2>
+This pipeline currently runs Docker containers locally after building.
+
+Next steps:
+
+🔧 Add deployment to AWS EC2, ECS, DigitalOcean, or Railway
+
+📤 Add SSH-based deployment using plugins like:
+
+ssh-agent and Publish Over SSH
+
+📁 Use Volume Bindings & Env Variables for production-grade deployment
+
+<h2>📁 Folder Structure</h2>
+pipeline-as-code-jenkins/<br>
+├── client/<br>
+│   ├── public/<br>
+│   ├── src/<br>
+│   │   ├── components/<br>
+│   │   ├── pages/<br>
+│   │   └── App.js<br>
+│   ├── package.json<br>
+│   └── ... (other React files)<br>
 <br>
-
-### Features
-
-- nteractive Courses: Engage with a variety of courses designed to help you master coding and technology.
-
-- User-Friendly Interface: Navigate through our intuitive and responsive UI built with React.
-
-- Efficient Backend: Enjoy a smooth experience powered by a Node.js and Express.js backend.
-
-- Secure Data Management: Your data is securely stored and managed with MongoDB.
-
-### Images of the Coding & Coffee Website :
+├── server/<br>
+│   ├── controllers/<br>
+│   ├── routes/<br>
+│   ├── models/<br>
+│   ├── Dockerfile<br>
+│   ├── server.js<br>
+│   ├── package.json<br>
+│   └── ... (other backend files)<br>
 <br>
-
-![Coding & Coffee](https://res.cloudinary.com/ddlepk8lb/image/upload/v1719677656/Home1_udepxj.png)
-
-
-<div style="display: flex; flex-wrap: wrap; justify-center: center; align-items: center;">
-
-  <img src="https://res.cloudinary.com/ddlepk8lb/image/upload/v1719677651/Home2_ncwm92.png" alt="Image 1" style="width: 50%; margin-bottom: 1%;"/>
-  <img src="https://res.cloudinary.com/ddlepk8lb/image/upload/v1719677652/Home3_axq568.png" alt="Image 2" style="width: 50%; margin-bottom: 1%;"/>
-  <img src="https://res.cloudinary.com/ddlepk8lb/image/upload/v1719677652/Home4_lvsi0d.png" alt="Image 3" style="width: 50%;"/>
-  <img src="https://res.cloudinary.com/ddlepk8lb/image/upload/v1719677652/Home5_nobuag.png" alt="Image 4" style="width: 50%;"/>
-
-</div>
+├── .github/<br>
+│   └── workflows/<br>
+│       └── main.yml<br>
 <br>
+├── Jenkinsfile<br>
+├── README.md<br>
+├── .env<br>
+└── docker-compose.yml (optional)<br>
 
-![Chart](https://res.cloudinary.com/ddlepk8lb/image/upload/v1719677651/DashBoardInstructor_ibxprh.png)
+<h2>🤝 Contribution Guidelines</h2>
+Have ideas or improvements? Feel free to fork this repo, raise issues, or submit pull requests.
 
-<div style="display: flex; flex-wrap: wrap; justify-center: center; align-items: center;">
-
-  <img src="https://res.cloudinary.com/ddlepk8lb/image/upload/v1719677650/Enroll_Courses_irpjlr.png" alt="Image 1" style="width: 50%; margin-bottom: 1%;"/>
-  <img src="https://res.cloudinary.com/ddlepk8lb/image/upload/v1719677651/Cart_s7xi72.png" alt="Image 2" style="width: 50%; margin-bottom: 1%;"/>
-  <img src="https://res.cloudinary.com/ddlepk8lb/image/upload/v1719677650/AddCourse_qguxtx.png" alt="Image 3" style="width: 50%;"/>
-  <img src="https://res.cloudinary.com/ddlepk8lb/image/upload/v1719677650/CourseBuilder_wrm2sf.png" alt="Image 4" style="width: 50%;"/>
-
-</div>
-
-### Technologies Used
-
-- Frontend: React.js, Tailwind CSS
-- Backend: Node.js, Express.js
-- Database: MongoDB
-- Authentication: JWT, bcrypt
-- Email Services: Node Mailer
-- Payments: Razorpay API
-- Deployment: Render, Vercel
-- Pictorial Representation: Chart.js
-- Version Control: Git, GitHub
-- Editor: Visual Studio Code
-- Design: Figma
-
-### Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like
-
-1. Fork the repository.
-2. Create a new branch (git checkout -b feature-branch).
-3. Commit your changes (git commit -m 'Add some feature').
-4. Push to the branch (git push origin feature-branch).
-5. Open a Pull Request.
-
-Please make sure your code adheres to the project's coding standards and includes tests.
-
-### Contact
-If you have any questions or suggestions, please contact me at [email@ramneet](ramneetsinghrtd@gmail.com)
+<h2>📫 Contact</h2>
+For collaboration or queries:<br>
+📧 Email: cloud@raghav<br>
+🌐 GitHub: @raghavgupta
 
